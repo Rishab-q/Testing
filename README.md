@@ -18,17 +18,9 @@
 
 ## 🛠 Setup
 
-1. **Clone the repo:**
-
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
    cd your-repo-name
-2 **Add packages**
+   dotnet restore
+   dotnet run
 
-  ``` bash
-  dotnet restore
--------------------
-3 **Run the project**
-
-  ```bash
-  dotnet run
