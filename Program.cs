@@ -19,17 +19,17 @@ try
     wait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("iframeId")));
 
     var form = driver.FindElement(By.XPath("//form"));
-    var fname_label = form.FindElement(By.XPath(".//label[contains(text(),'First Name')]"));
+    var fname_label = form.FindElement(By.XPath(".//label[contains(normalize-space(.),'First Name')]"));
     var fname_for = fname_label.GetAttribute("for");
     var Fname = form.FindElement(By.XPath($".//input[@id='{fname_for}']"));
     Fname.SendKeys("Rishab");
 
-    var lname_label = form.FindElement(By.XPath(".//label[contains(text(),'Last Name')]"));
+    var lname_label = form.FindElement(By.XPath(".//label[contains(normalize-space(.),'Last Name')]"));
     var lname_for = lname_label.GetAttribute("for");
     var Lname = form.FindElement(By.XPath($".//input[@id='{lname_for}']"));
     Lname.SendKeys("Anand");
 
-    var email_label = form.FindElement(By.XPath(".//label[contains(text(),'Email')]"));
+    var email_label = form.FindElement(By.XPath(".//label[contains(normalize-space(.),'Email')]"));
     var email_for = email_label.GetAttribute("for");
     var email = form.FindElement(By.XPath($".//input[@id='{email_for}']"));
     email.SendKeys("rishab.anand@example.com");
@@ -38,7 +38,7 @@ try
 
     var el = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[.//h3[contains(text(),'Submit')and contains(text(),'data')]]")));
 
-    Thread.Sleep(1000);//added this so that trhe email field returns as the same not encoded
+    Thread.Sleep(1000);//added this so that the email field returns as the same not encoded
 
     var data = el.FindElement(By.XPath(".//pre")).Text;
 
