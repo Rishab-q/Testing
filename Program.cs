@@ -5,9 +5,10 @@ using SeleniumExtras.WaitHelpers;
 using System.Text.Json;
 
 var options = new ChromeOptions();
-options.AddArgument("--headless"); 
+options.AddArgument("--headless");
 
 IWebDriver driver = new ChromeDriver(options);
+
 
 try
 {
@@ -18,13 +19,21 @@ try
     wait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.Id("iframeId")));
 
     var form = driver.FindElement(By.XPath("//form"));
-
-    var Fname = form.FindElement(By.XPath(".//input[@id='fname']"));
+    var fname_label = form.FindElement(By.XPath(".//label[contains(text(),'First Name')]"));
+    var fname_for = fname_label.GetAttribute("for");
+    var Fname = form.FindElement(By.XPath($".//input[@id='{fname_for}']"));
     Fname.SendKeys("Rishab");
-    var Lname = form.FindElement(By.XPath(".//input[@id='lname']"));
+
+    var lname_label = form.FindElement(By.XPath(".//label[contains(text(),'Last Name')]"));
+    var lname_for = lname_label.GetAttribute("for");
+    var Lname = form.FindElement(By.XPath($".//input[@id='{lname_for}']"));
     Lname.SendKeys("Anand");
-    var email = form.FindElement(By.XPath(".//input[@id='email']"));
+
+    var email_label = form.FindElement(By.XPath(".//label[contains(text(),'Email')]"));
+    var email_for = email_label.GetAttribute("for");
+    var email = form.FindElement(By.XPath($".//input[@id='{email_for}']"));
     email.SendKeys("rishab.anand@example.com");
+
     form.Submit();
 
     var el = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[.//h3[contains(text(),'Submit')and contains(text(),'data')]]")));
